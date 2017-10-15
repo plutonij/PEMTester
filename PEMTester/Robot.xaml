@@ -1,0 +1,101 @@
+﻿<Window x:Class="PEMTester.Robot"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PEMTester"
+        mc:Ignorable="d"
+        Title="{Binding Id}" Height="400" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="5,0,5,0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox VerticalAlignment="Center" Text="{Binding Commands}"></TextBox>
+            <CheckBox Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="Hidden">Loop</CheckBox>
+            <Button HorizontalAlignment="Right" Grid.Column="2" VerticalAlignment="Center" Click="ExecuteClick" >Execute</Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="5,0,5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    
+            </Grid.RowDefinitions>
+
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="0">1</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="0">2</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="0">3</Button>
+
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="1">4</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="1">5</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="1">6</Button>
+
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="2">7</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="2">8</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="2">9</Button>
+
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="3">Menu</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="3">0</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="3">.</Button>
+
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="4">OK</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="4">Correct</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="4">Stop</Button>
+
+            
+            <!--<TextBlock  TextAlignment="Left">Status</TextBlock>-->
+
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Click="CardClick"  Grid.Column="0" Grid.Row="0">Remove</Button>
+            <Button Click="CardClick"  Grid.Column="0" Grid.Row="1">Insert</Button>
+            <Button Click="HomeClick" Grid.Column="0" Grid.Row="2">Home</Button>
+            <Button Click="SleepClick" Grid.Column="0" Grid.Row="3">Sleep</Button>
+            <Button Click="ResetClick" Grid.Column="0" Grid.Row="4">Reset</Button>
+        </Grid>
+
+        <StatusBar Grid.ColumnSpan="3" Grid.Row="5">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem>
+                <TextBlock Text="{Binding Path=NumberOfRequests, Mode=TwoWay}" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

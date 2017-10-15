@@ -5,8 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PEMTester"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Width="250" Height="250">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+        <DockPanel HorizontalAlignment="Stretch" Margin="0,5,0,0" >
+            <Label Margin="5, 0 5, 0" MinWidth="40">Host</Label>
+                <TextBox  Margin="5, 0 5, 0" Text="{Binding IP}" />
+            </DockPanel>
+        <DockPanel HorizontalAlignment="Stretch" Margin="0,5,0,0" >
+                <Label  Margin="5, 0 5, 0" MinWidth="40">Port</Label>
+                <TextBox  Margin="5, 0 5, 0" Text="{Binding Port}"/>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Stretch" Margin="0,5,0,0">
+            <Button Margin="5, 0 5, 0" MinWidth="40" Click="Button_Click">Get Info</Button>
+        </DockPanel>
         
+    </StackPanel>
+        <ScrollViewer Grid.Row="1" Margin="5,5,0,0">
+            <ListBox VerticalAlignment="Stretch" ItemsSource="{Binding Ids, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <EventSetter Event="MouseDoubleClick" Handler="OnListItemClick"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </ScrollViewer>
     </Grid>
 </Window>
