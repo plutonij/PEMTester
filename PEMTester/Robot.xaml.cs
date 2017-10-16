@@ -15,6 +15,7 @@ namespace PEMTester
     /// </summary>
     public partial class Robot : Window, INotifyPropertyChanged
     {
+        private List<Post> loopPost;
         public string Commands { get; set; }
         private string id;
         private string Id
@@ -47,6 +48,21 @@ namespace PEMTester
             
 
         }
+
+        private bool? loop;
+        public bool? Loop
+        {
+            get
+            {
+                return loop?? false;
+            }
+            set
+            {
+                loop = value;
+                NotifyPropertyChanged("Loop");
+            }
+        }
+
         private HttpSender sender;
 
 
@@ -61,12 +77,25 @@ namespace PEMTester
             this.url = url;
             Title = id;
             numberOfRequests = string.Format("running {0} requests", numberRequests);
+            loopPost = new List<Post>();
         }
 
         private void OnRequestComplete(int result)
         {
             numberRequests--;
             NumberOfRequests = string.Format("running {0} requests", numberRequests);
+
+            if(0 < loopPost.Count)
+            {
+                var command = loopPost[0];
+
+                if (loop == false)
+                {
+                    loopPost.RemoveAt(0);
+                }
+
+                Post(command);
+            }
 
             //todo result
         }
@@ -86,6 +115,11 @@ namespace PEMTester
                 };
 
                 Post(commands);
+
+                if(true == loop)
+                {
+                    loopPost.Add(commands);
+                }
             }
             catch
             {

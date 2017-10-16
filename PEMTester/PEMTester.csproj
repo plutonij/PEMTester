@@ -60,7 +60,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="HttpSender.cs" />
-    <Compile Include="INotifyChanged.cs" />
     <Compile Include="Objects\Post.cs" />
     <Compile Include="Robot.xaml.cs">
       <DependentUpon>Robot.xaml</DependentUpon>

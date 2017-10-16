@@ -7,79 +7,72 @@
         mc:Ignorable="d"
         Title="{Binding Id}" Height="400" Width="300">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Grid Margin="5,0,5,0" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBox VerticalAlignment="Center" Text="{Binding Commands}"></TextBox>
-            <CheckBox Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="Hidden">Loop</CheckBox>
-            <Button HorizontalAlignment="Right" Grid.Column="2" VerticalAlignment="Center" Click="ExecuteClick" >Execute</Button>
-        </Grid>
-
-        <Grid Grid.Row="1" Margin="5,0,5,0">
+       
+        <Grid Grid.Row="0" Margin="5,0,5,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="0">1</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="0">2</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="0">3</Button>
+            <GroupBox Grid.ColumnSpan="4" Header="Multi Commands" Margin="0,5,0,5">
+                <Grid Margin="0,0,0,0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox VerticalAlignment="Stretch" Text="{Binding Commands}" Margin="1,3,1,3"></TextBox>
+                    <Button  Grid.Column="1" VerticalAlignment="Stretch" Click="ExecuteClick" Margin="1,3,1,3">Execute</Button>
+                    <CheckBox Grid.Column="2" Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding Loop}">Loop</CheckBox>
+                </Grid>
+            </GroupBox>
 
-            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="1">4</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="1">5</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="1">6</Button>
 
-            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="2">7</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="2">8</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="2">9</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="1" Margin="1">1</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="1" Margin="1">2</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="1" Margin="1">3</Button>
 
-            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="3">Menu</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="3">0</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="3">.</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="2" Margin="1">4</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="2" Margin="1">5</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="2" Margin="1">6</Button>
 
-            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="4">OK</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="4">Correct</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="4">Stop</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="3" Margin="1">7</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="3" Margin="1">8</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="3" Margin="1">9</Button>
 
-            
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="4" Margin="1">Menu</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="4" Margin="1">0</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="4" Margin="1">.</Button>
+
+            <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="5" Margin="1">OK</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="5" Margin="1">Correct</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="5" Margin="1">Stop</Button>
+
+           
+            <Button Click="CardClick" Grid.Column="4" Grid.Row="1" Margin="1">Remove</Button>
+            <Button Click="CardClick" Grid.Column="4" Grid.Row="2" Margin="1">Insert</Button>
+            <Button Click="HomeClick" Grid.Column="4" Grid.Row="3" Margin="1">Home</Button>
+            <Button Click="SleepClick" Grid.Column="4" Grid.Row="4" Margin="1">Sleep</Button>
+            <Button Click="ResetClick" Grid.Column="4" Grid.Row="5" Margin="1">Reset</Button>
+
+
             <!--<TextBlock  TextAlignment="Left">Status</TextBlock>-->
 
-        </Grid>
-
-        <Grid Grid.Column="1" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button Click="CardClick"  Grid.Column="0" Grid.Row="0">Remove</Button>
-            <Button Click="CardClick"  Grid.Column="0" Grid.Row="1">Insert</Button>
-            <Button Click="HomeClick" Grid.Column="0" Grid.Row="2">Home</Button>
-            <Button Click="SleepClick" Grid.Column="0" Grid.Row="3">Sleep</Button>
-            <Button Click="ResetClick" Grid.Column="0" Grid.Row="4">Reset</Button>
         </Grid>
 
         <StatusBar Grid.ColumnSpan="3" Grid.Row="5">
@@ -88,7 +81,8 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                     </Grid>
                 </ItemsPanelTemplate>
