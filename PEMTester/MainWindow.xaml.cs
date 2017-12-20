@@ -49,20 +49,31 @@ namespace PEMTester
         {
             string json = string.Empty;
             string url = string.Format("http://{0}:{1}/", IP, Port);
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-           // request.AutomaticDecompression = DecompressionMethods.GZip;
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
+            try
             {
-                json = reader.ReadToEnd();
-            }
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                // request.AutomaticDecompression = DecompressionMethods.GZip;
 
-            GetId tmp = JsonConvert.DeserializeObject<GetId>(json);
-            Ids = new ObservableCollection<string>(tmp.id);
-            Console.WriteLine(json);
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    json = reader.ReadToEnd();
+                }
+
+                GetId tmp = JsonConvert.DeserializeObject<GetId>(json);
+                Ids = new ObservableCollection<string>(tmp.id);
+                Console.WriteLine(json);
+            }
+            catch(Exception ex)
+            {
+                Ids = new ObservableCollection<string>()
+                {
+                    "Error"
+                };
+
+
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

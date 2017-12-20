@@ -60,7 +60,7 @@
             <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="4" Margin="1">.</Button>
 
             <Button Click="PinpadButtonClicked" Grid.Column="0" Grid.Row="5" Margin="1">OK</Button>
-            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="5" Margin="1">Correct</Button>
+            <Button Click="PinpadButtonClicked" Grid.Column="1" Grid.Row="5" Margin="1" Content="Clear"/>
             <Button Click="PinpadButtonClicked" Grid.Column="2" Grid.Row="5" Margin="1">Stop</Button>
 
            

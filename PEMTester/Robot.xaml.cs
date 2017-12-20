@@ -139,11 +139,17 @@ namespace PEMTester
         private void PinpadButtonClicked(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
+            string content = b.Content.ToString().ToUpper();
+
+            if (b.Content.Equals("."))
+            {
+                content = "dot".ToUpper();
+            }
 
             Post commands = new Post()
             {
                 id = Id,
-                commands = new List<string>() { string.Format("PRESS {0}", b.Content.ToString().ToUpper()) }
+                commands = new List<string>() { string.Format("PRESS {0}", content) }
             };
 
             Post(commands);
