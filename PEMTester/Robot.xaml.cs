@@ -7,6 +7,7 @@ using System.Windows;
 using System;
 using System.ComponentModel;
 using System.Windows.Controls;
+using System.Threading;
 
 namespace PEMTester
 {
@@ -17,6 +18,7 @@ namespace PEMTester
     {
         private List<Post> loopPost;
         public string Commands { get; set; }
+        public string MuxCommands { get; set; }
         private string id;
         private string Id
         {
@@ -192,6 +194,20 @@ namespace PEMTester
                 id = Id,
                 commands = new List<string>() { command }
             };
+        }
+
+        private void ExecuteClickMux(object sender, RoutedEventArgs e)
+        {
+
+            if (MuxCommands != null)
+            {
+                foreach (var c in MuxCommands.Split(',').Select(x => string.Format("SELECT PORT {0}", x.ToUpper())).ToList())
+                {
+                    Post(CreateSingleCommand(c));
+                    Thread.Sleep(1000);
+                }
+            }
+
         }
     }
 }
