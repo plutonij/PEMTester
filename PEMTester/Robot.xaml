@@ -5,15 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PEMTester"
         mc:Ignorable="d"
-        Title="{Binding Id}" Height="500" Width="300">
+        Title="{Binding Id}"  Height="500" Width="700">
     <Grid>
         
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
        
-        <Grid Grid.Row="0" Margin="5,0,5,5">
+        <Grid Grid.Row="0" Grid.Column="0" Margin="5,0,5,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition/>
@@ -87,8 +91,11 @@
             <!--<TextBlock  TextAlignment="Left">Status</TextBlock>-->
 
         </Grid>
+        <ScrollViewer Name="Scroller" Margin="0" Grid.Column="1">
+            <TextBlock Name="OutputBlock" FontFamily="Consolas" Padding="10" Text="{Binding Log}"/>
+            </ScrollViewer>
 
-        <StatusBar Grid.ColumnSpan="3" Grid.Row="5">
+            <StatusBar Grid.ColumnSpan="2" Grid.Row="1">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>

@@ -17,7 +17,7 @@ namespace PEMTester
             client = new HttpClient();
         }
 
-        public Action<int> OnPostComplete;
+        public Action<int, string> OnPostComplete;
 
         public static HttpSender Instance
         {
@@ -41,18 +41,13 @@ namespace PEMTester
 
                 var response = await client.PostAsync(url, content);
 
-                var responseString = await response.Content.ReadAsStringAsync();
+                OnPostComplete?.Invoke((int)response.StatusCode, response.ReasonPhrase);
 
-                var s = string.Empty;
-                s = responseString;
-
-                OnPostComplete?.Invoke((int)response.StatusCode);
             }
             catch
             {
-                OnPostComplete?.Invoke(400);
+                OnPostComplete?.Invoke(400, string.Empty);
             }
-
 
             
 

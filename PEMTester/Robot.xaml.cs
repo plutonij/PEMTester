@@ -8,6 +8,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Threading;
+using System.Text;
 
 namespace PEMTester
 {
@@ -65,6 +66,13 @@ namespace PEMTester
             }
         }
 
+        private StringBuilder log;
+        public string Log
+        {
+            get { return log.ToString();}
+            set { log.AppendLine(value); NotifyPropertyChanged("Log"); }
+        }
+
         private HttpSender sender;
 
 
@@ -80,14 +88,17 @@ namespace PEMTester
             Title = id;
             numberOfRequests = string.Format("running {0} requests", numberRequests);
             loopPost = new List<Post>();
+            log = new StringBuilder();
         }
 
-        private void OnRequestComplete(int result)
+        private void OnRequestComplete(int result, string resultJson)
         {
             numberRequests--;
             NumberOfRequests = string.Format("running {0} requests", numberRequests);
 
-            if(0 < loopPost.Count)
+            Log = string.Format("<-- {0}{1}{0}", Environment.NewLine, resultJson);
+
+            if (0 < loopPost.Count)
             {
                 var command = loopPost[0];
 
@@ -98,6 +109,8 @@ namespace PEMTester
 
                 Post(command);
             }
+
+
 
             //todo result
         }
@@ -135,7 +148,12 @@ namespace PEMTester
 
             numberRequests++;
             NumberOfRequests = string.Format("running {0} requests", numberRequests);
+
+            Log = string.Format("--> {0}{1}{0}", Environment.NewLine, JsonConvert.SerializeObject(p, Formatting.Indented));
+
             sender.Post(jsonString, url);
+            
+
         }
 
         private void PinpadButtonClicked(object sender, RoutedEventArgs e)
