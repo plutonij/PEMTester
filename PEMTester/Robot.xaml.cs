@@ -227,5 +227,17 @@ namespace PEMTester
             }
 
         }
+
+        private void ExecuteClickMag(object sender, RoutedEventArgs e)
+        {
+            if (MuxCommands != null)
+            {
+                foreach (var c in MuxCommands.Split(',').Select(x => string.Format("SELECT CARD {0}", x.ToUpper())).ToList())
+                {
+                    Post(CreateSingleCommand(c));
+                    Thread.Sleep(1000);
+                }
+            }
+        }
     }
 }
