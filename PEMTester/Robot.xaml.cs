@@ -35,6 +35,21 @@ namespace PEMTester
         }
         private string url;
         private int numberRequests = 0;
+        private int executedRequests;
+        public string ExecutedRequests
+        {
+            get
+            {
+                return string.Format("{0} requests executed", executedRequests);
+            }
+            set
+            {
+                if (int.TryParse(value, out executedRequests))
+                {
+                    NotifyPropertyChanged("ExecutedRequests");
+                }
+            }
+        }
 
         private string numberOfRequests;
         public string NumberOfRequests
@@ -96,7 +111,7 @@ namespace PEMTester
             numberRequests--;
             NumberOfRequests = string.Format("running {0} requests", numberRequests);
 
-            Log = string.Format("<-- {0}{1}{0}", Environment.NewLine, resultJson);
+            //Log = string.Format("<-- {0}{1}{0}", Environment.NewLine, resultJson);
 
             if (0 < loopPost.Count)
             {
@@ -119,14 +134,44 @@ namespace PEMTester
         {
             try
             {
-                string[] command = Commands.Split(',');
+                string[] commandArray = Commands.Split(',');
+                List<string> robotCommand = new List<string>();
 
-                Post commands = new Post()
+                foreach(var command in commandArray)
+                {
+                    if (int.TryParse(command, out int result))
+                    {
+                        robotCommand.Add(string.Format("PRESS {0}", result));
+                    }
+                    else switch(command.ToLower())
+                        {
+                            case "insert":
+                                robotCommand.Add("INSERT CARD");
+                                break;
+                            case "eject":
+                                robotCommand.Add("REMOVE CARD");
+                                break;
+                            case "swipel":
+                                robotCommand.Add("SWIPE L");
+                                break;
+                            case "swiper":
+                                robotCommand.Add("SWIPE R");
+                                break;
+                            case "home":
+                                robotCommand.Add("HOME");
+                                break;
+
+                            
+                        }
+                }
+
+
+
+            Post commands = new Post()
                 {
                     id = Id,
-                    commands = Commands.Split(',')
-                                       .Select(x => string.Format("PRESS {0}", x.ToUpper()))
-                                       .ToList()
+                    commands= robotCommand
+                   
                 };
 
                 Post(commands);
@@ -149,9 +194,11 @@ namespace PEMTester
             numberRequests++;
             NumberOfRequests = string.Format("running {0} requests", numberRequests);
 
-            Log = string.Format("--> {0}{1}{0}", Environment.NewLine, JsonConvert.SerializeObject(p, Formatting.Indented));
+            //Log = string.Format("--> {0}{1}{0}", Environment.NewLine, JsonConvert.SerializeObject(p, Formatting.Indented));
 
             sender.Post(jsonString, url);
+
+            ExecutedRequests = (++ executedRequests).ToString();
             
 
         }
