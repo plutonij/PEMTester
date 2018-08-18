@@ -139,7 +139,8 @@ namespace PEMTester
 
                 foreach(var command in commandArray)
                 {
-                    if (int.TryParse(command, out int result))
+                    int result = 0;
+                    if (int.TryParse(command, out result))
                     {
                         robotCommand.Add(string.Format("PRESS {0}", result));
                     }
