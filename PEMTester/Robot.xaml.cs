@@ -134,44 +134,12 @@ namespace PEMTester
         {
             try
             {
-                string[] commandArray = Commands.Split(',');
-                List<string> robotCommand = new List<string>();
-
-                foreach(var command in commandArray)
-                {
-                    int result = 0;
-                    if (int.TryParse(command, out result))
-                    {
-                        robotCommand.Add(string.Format("PRESS {0}", result));
-                    }
-                    else switch(command.ToLower())
-                        {
-                            case "insert":
-                                robotCommand.Add("INSERT CARD");
-                                break;
-                            case "eject":
-                                robotCommand.Add("REMOVE CARD");
-                                break;
-                            case "swipel":
-                                robotCommand.Add("SWIPE L");
-                                break;
-                            case "swiper":
-                                robotCommand.Add("SWIPE R");
-                                break;
-                            case "home":
-                                robotCommand.Add("HOME");
-                                break;
-
-                            
-                        }
-                }
-
-
-
-            Post commands = new Post()
+                Post commands = new Post()
                 {
                     id = Id,
-                    commands= robotCommand
+                    commands= Commands.Split(',')
+                        .Select(c => ExtractCommand(c))
+                        .ToList(),
                    
                 };
 
@@ -186,6 +154,38 @@ namespace PEMTester
             {
                 NumberOfRequests = string.Format("The request field is empty");
             }
+        }
+
+        private string ExtractCommand(string command)
+        {
+            int result = 0;
+            string resultCommand = string.Empty;
+            if (int.TryParse(command, out result))
+            {
+                resultCommand = string.Format("PRESS {0}", result);
+            }
+            else switch (command.ToLower())
+                {
+                    case "insert":
+                        resultCommand = "INSERT CARD";
+                        break;
+                    case "eject":
+                        resultCommand = "REMOVE CARD";
+                        break;
+                    case "swipel":
+                        resultCommand = "SWIPE L";
+                        break;
+                    case "swiper":
+                        resultCommand = "SWIPE R";
+                        break;
+                    case "home":
+                        resultCommand = "HOME";
+                        break;
+
+
+                }
+
+            return resultCommand;
         }
 
         private void Post(Post p)
