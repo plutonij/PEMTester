@@ -164,26 +164,10 @@ namespace PEMTester
             {
                 resultCommand = string.Format("PRESS {0}", result);
             }
-            else switch (command.ToLower())
-                {
-                    case "insert":
-                        resultCommand = "INSERT CARD";
-                        break;
-                    case "eject":
-                        resultCommand = "REMOVE CARD";
-                        break;
-                    case "swipel":
-                        resultCommand = "SWIPE L";
-                        break;
-                    case "swiper":
-                        resultCommand = "SWIPE R";
-                        break;
-                    case "home":
-                        resultCommand = "HOME";
-                        break;
-
-
-                }
+            else
+            {
+                resultCommand = command.ToUpper();
+            }
 
             return resultCommand;
         }
