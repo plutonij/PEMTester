@@ -65,14 +65,12 @@ namespace PEMTester
                 Ids = new ObservableCollection<string>(tmp.id);
                 Console.WriteLine(json);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 Ids = new ObservableCollection<string>()
                 {
                     "Error"
                 };
-
-
             }
         }
 
